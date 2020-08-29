@@ -1,0 +1,16 @@
+---
+- name: Error Handling
+  hosts: all
+  tasks:
+   - block:
+      - name: Install tomcat8 using apt module
+        apt:
+         name: tomcat8
+         state: present
+     rescue:
+      - name: Isntall tomcat8 using yum module
+        yum:
+         name: tomcat8
+         state: present
+...
+

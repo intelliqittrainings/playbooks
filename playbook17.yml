@@ -1,0 +1,16 @@
+---
+- name: Change ownership of file based on a condition
+  hosts: all
+  tasks:
+   - name: Capture info about a file
+     stat:
+      path: /home/ubuntu/file12
+     register: result
+   - name: Display output of above module
+     debug:
+      var: result
+   - name: Give execute permissions
+     file:
+      name: /home/ubuntu/file12
+      mode: 0770
+     when: result.stat.executable == false

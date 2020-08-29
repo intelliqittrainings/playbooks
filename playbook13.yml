@@ -1,0 +1,34 @@
+---
+- name: Setup of jenkins and required s/w's
+  hosts: devserver
+  tasks:
+   - name: Install required s/w
+     apt:
+      name: "{{item.a}}"
+      state: present
+      update_cache: "{{item.b}}"
+     with_items:
+      - {a: openjdk-8-jdk,b: yes}
+      - {a: git,b: no}
+      - {a: maven,b: no}
+   - name: Download jenkins.war
+     get_url:
+      url: http://mirrors.jenkins.io/war-stable/2.235.5/jenkins.war
+      dest: /tmp
+- name: Setup tomcat on qa and prodservers
+  hosts: servers
+  tasks:
+   - name: Install tomcat8 and tomcat8-admin
+     apt:
+      name: "{{item.a}}"
+      state: present
+      update_cache: "{{item.b}}"
+     with_items:
+      - {a: tomcat8,b: yes}
+      - {a: tomcat8-admin,b: no}
+   - name: Copy tomcat-users.xml file
+     copy:
+      src: tomcat-users.xml
+      dest: /etc/tomcat8
+...
+

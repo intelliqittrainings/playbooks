@@ -1,0 +1,14 @@
+a: tomcat8
+b: present
+c: yes
+d: tomcat8-admin
+e: no
+f: tomcat-users.xml
+g: /etc/tomcat8
+h: 8080
+i: 9090
+j: /etc/tomcat8/server.xml
+k: restarted
+l: http://172.31.55.129:9090
+m: 200
+n: http://172.31.48.61:9090

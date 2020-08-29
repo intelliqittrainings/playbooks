@@ -1,0 +1,12 @@
+---
+- name: Creating users
+  hosts: all
+  tasks:
+   - name: User creation
+     user:
+      name: Rani
+      password: intelliqit
+      uid: 5566
+      home: /home/Rani
+...
+

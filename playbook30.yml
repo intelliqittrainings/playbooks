@@ -1,0 +1,15 @@
+---
+- name: Download docker images
+  hosts: all
+  tasks:
+   - name: Pull multiple docker images
+     docker_image:
+      name: "{{item}}"
+     with_items:
+      - centos
+      - ubuntu
+      - alpine
+      - busybox
+      - registry
+      - httpd
+...

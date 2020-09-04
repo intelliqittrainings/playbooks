@@ -1,0 +1,22 @@
+---
+- name: Create CI-CD environment on all managed nodes
+  hosts: all
+  tasks:
+   - name: Create a jenkins contianer
+     docker_container:
+      image: jenkins
+      name: jenkinsserver
+      ports:
+       - 6060:8080
+   - name: Create a tomcat as QAServer and ProdServer
+     docker_container:
+      image: tomcat
+      name: "{{item.a}}"
+      ports:
+       - "{{item.b}}"
+      links:
+       - jenkinsserver:jenkins
+     with_items:
+      - {a: qaserver,b: "7070:8080"}
+      - {a: prodserver,b: "8080:8080"}
+

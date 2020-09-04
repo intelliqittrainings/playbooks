@@ -1,0 +1,16 @@
+---
+- name: Setup of Docker
+  hosts: all
+  tasks:
+   - name: Install python-pip
+     apt:
+      name: python-pip
+      state: present
+      update_cache: yes
+   - name: Download docker script and install docker and install docker-py
+     shell: "{{item}}"
+     with_items:
+      - curl -fsSL https://get.docker.com -o get-docker.sh
+      - sh get-docker.sh
+      - pip install docker-py
+...

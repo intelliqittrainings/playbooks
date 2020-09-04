@@ -1,0 +1,14 @@
+---
+- name: Login into docker hub abd upload a docker image
+  hosts: 172.31.42.87
+  tasks:
+   - name: Login into dockerhub
+     docker_login:
+      username: intelliqit
+      password: krishna123
+      email: intelliqit@gmail.com
+   - name: Push the image into docker hub
+     docker_image:
+      name: intelliqit/ubuntutree
+      push: yes
+
